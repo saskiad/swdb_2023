@@ -13,5 +13,8 @@ chapters:
   - file: visual-coding-2p/vc2p-dataset
   - file: visual-coding-2p/vc2p-session-data
   - file: visual-coding-2p/vc2p-stimuli
-
-
+- file: visual-behavior/vb-background
+  sections:
+  - file: visual-behavior/vbn-background
+  - file: visual-behavior/vbn-quickstart
+  - file: visual-behavior/vbn-data-access
