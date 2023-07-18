@@ -11,9 +11,6 @@ kernelspec:
   language: python
   name: python3
 ---
-```{code-cell} ipython3
-import pandas as pd
-```
 
 # Visual Behavior Neuropixels Dataset
 
@@ -24,6 +21,8 @@ The main entry point to the VBN dataset is the <code>VisualBehaviorNeuropixelsPr
 We begin by importing the <code>VisualBehaviorNeuropixelsProjectCache</code>  class.
 
 ```{code-cell} ipython3
+import pandas as pd
+
 from allensdk.brain_observatory.behavior.behavior_project_cache.\
     behavior_neuropixels_project_cache \
     import VisualBehaviorNeuropixelsProjectCache
@@ -75,6 +74,15 @@ This table gives us lots of useful metadata about each recording session, includ
 To demystify a few of these columns, let's briefly review the experimental design. Each mouse was trained with one of two image sets (`G` or `H`). For the majority of mice, we recorded two sessions: one with the trained 'familiar' image set and one with a 'novel' image set. Note that two of the eight images were shared across these two image sets as diagrammed below for an example mouse. For this mouse, image set `G` (images on blue and purple backgrounds) was used in training and was therefore 'familiar', while image set `H` (the two holdover images on purple background plus six novel images on red background) was 'novel'. 
 
 ![doctask](/images/image_sets_and_training_trajectories_diagram_defaultsdk_and_unfiltered.webp)
+
+Each recording session can be defined by a few parameters, including the `image_set` used (G or H), the `experience_level` of the mouse (indicating whether the mouse had seen the image set in previous training sessions) and the `session_number` (indicating whether it was the first or second recording day for the mouse). In bottom bubble of the above diagram, you can see the three different training/recording trajectories mice in this dataset took:
+
+* Train on G; see G on first recording day; see H on second recording day
+* Train on G; see H on first recording day; see G on second recording day
+* Train on H; see H on first recording day; see G on second recording day
+
+The numbers in the recording session cells indicate how many of each session type exist in this dataset. The first number is what the SDK returns by default. The second number (in parentheses) is what the SDK returns without filtering for abnormalities (see below as well as the [Data Access tutorial](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_data_access.html)).
+
 
 Here is a brief description of each column: 
 
