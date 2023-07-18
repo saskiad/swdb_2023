@@ -22,9 +22,10 @@ chapters:
     - file: visual-behavior/VBO-SessionData
   - file: visual-behavior/VB-Neuropixels
     sections:
+    - file: visual-behavior/VBN-Dataset
     - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_dataset_manifest.html
-      title: VBN Data Manifest Files
+      title: Tutorial VBN Data Manifest Files
     - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_quickstart.html
-      title: VBN Session Data
+      title: Tutorial VBN Session Data
     
 
