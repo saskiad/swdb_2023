@@ -15,6 +15,16 @@ chapters:
   - file: visual-coding-2p/vc2p-stimuli
 - file: visual-behavior/vb-background
   sections:
-  - file: visual-behavior/vbn-background
-  - file: visual-behavior/vbn-quickstart
-  - file: visual-behavior/vbn-data-access
+  - file: visual-behavior/Task
+  - file: visual-behavior/VB-Ophys
+    sections:
+    - file: visual-behavior/VBO-Dataset
+    - file: visual-behavior/VBO-SessionData
+  - file: visual-behavior/VB-Neuropixels
+    sections:
+    - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_dataset_manifest.html
+      title: VBN Data Manifest Files
+    - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_quickstart.html
+      title: VBN Session Data
+    
+
