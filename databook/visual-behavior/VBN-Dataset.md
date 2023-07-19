@@ -14,14 +14,13 @@ kernelspec:
 
 # Visual Behavior Neuropixels Dataset
 
-We will start exploring the parameters of the dataset to learn what data is available. 
-
-The main entry point to the VBN dataset is the <code>VisualBehaviorNeuropixelsProjectCache</code> class.  This class is responsible for downloading any requested data or metadata as needed and storing it in well known locations.  For this workshop, all of the data has been preloaded onto the hard drives you have received, and is available on AWS.
+The main entry point to the VBN dataset is the <code>VisualBehaviorNeuropixelsProjectCache</code> class.  This class is responsible for downloading any requested data or metadata as needed and storing it in well known locations.  For detailed info about how to access this data, check out [this tutorial](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_data_access.html)
 
 We begin by importing the <code>VisualBehaviorNeuropixelsProjectCache</code>  class.
 
 ```{code-cell} ipython3
 import pandas as pd
+import os
 
 from allensdk.brain_observatory.behavior.behavior_project_cache.\
     behavior_neuropixels_project_cache \
