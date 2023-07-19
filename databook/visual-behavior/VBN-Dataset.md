@@ -32,10 +32,10 @@ Now we can specify our cache directory and set up the cache.
 
 ```{code-cell} ipython3
 # this path should point to the location of the dataset on your platform
-cache_dir = os.path.join(data_root, data_dirname)
+cache_dir = '/data/'
 
 cache = VisualBehaviorNeuropixelsProjectCache.from_local_cache(
-            cache_dir=cache_dir, use_static_cache=use_static)
+            cache_dir=cache_dir, use_static_cache=True)
 ```
 
 We can use the <code>VisualBehaviorNeuropixelsProjectCache</code> to explore the parameters of this dataset. Let's start by examining the cache metadata tables.
