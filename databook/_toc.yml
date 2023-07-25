@@ -24,9 +24,10 @@ chapters:
     sections:
     - file: visual-behavior/VBN-Dataset
     - file: visual-behavior/VBN-SessionData
-    - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_dataset_manifest.html
-      title: Tutorial VBN Data Manifest Files
-    - url: https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_quickstart.html
-      title: Tutorial VBN Session Data
-    
+    - file: visual-behavior/VBN-Tutorial-Quality_Metrics
+      title: Tutorial Using Unit Quality and Waveform Metrics
+    - file: visual-behavior/VBN-Tutorial-Aligning_Neural_Data_to_Stimuli.ipynb
+      title: Tutorial Aligning Neural Data to Stimuli
+    - file: visual-behavior/VBN-Tutorial-Aligning_Behavior_Data_to_Task_Events.ipynb
+      title: Tutorial Aligning Behavioral Data to Task Events
 

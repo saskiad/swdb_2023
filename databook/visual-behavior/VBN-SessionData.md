@@ -35,10 +35,10 @@ Now we can specify our cache directory and set up the cache.
 
 ```{code-cell} ipython3
 # this path should point to the location of the dataset on your platform
-cache_dir = os.path.join(data_root, data_dirname)
+cache_dir = '/data/'
 
 cache = VisualBehaviorNeuropixelsProjectCache.from_local_cache(
-            cache_dir=cache_dir, use_static_cache=use_static)
+            cache_dir=cache_dir, use_static_cache=True)
 ```
 
 We can use the <code>VisualBehaviorNeuropixelsProjectCache</code> to grab the data for one example session:
@@ -157,7 +157,7 @@ probe_lfp = session.get_lfp(1054059291)
 Since this LFP has been spatially downsampled, a high resolution CSD has been pre-computed and stored as an xarray.DataArray. You can access this CSD as follows:
 
 ```{code-cell} ipython3
-probe_csd = session.session.get_current_source_density(1054059291)
+probe_csd = session.get_current_source_density(1054059291)
 ```
 
 ## Behavior Data
@@ -359,7 +359,7 @@ This shows us the structure of this experiment (and every experiment in this dat
 
 Here's a quick explanation for each of the columns in this table:
 
-#### General
+<b>General</b>
 
 `active`: Boolean indicating when the change detection task (with the lick spout available to the mouse) was run. This should only be TRUE for block 0.
 
@@ -379,7 +379,7 @@ Here's a quick explanation for each of the columns in this table:
 
 `end_frame`: Stimulus frame index when this stimulus ended.
 
-#### Change detection task and Passive replay (blocks 0 and 5)
+<b>Change</b> detection task and Passive replay (blocks 0 and 5)
 
 `flashes_since_change`: Indicates how many flashes of the same image have occurred since the last stimulus change.
 
@@ -391,7 +391,7 @@ Here's a quick explanation for each of the columns in this table:
 
 `rewarded`: Indicates whether a reward was given after this image presentation. During the passive replay block (5), this value indicates that a reward was issued for the corresponding image presentation during the active behavior block (0). No rewards were given during passive replay.
 
-#### Receptive field mapping gabor stimulus (block 2)
+<b>Receptive field mapping gabor stimulus (block 2)</b>
 
 `orientation`: Orientation of gabor. 
 
@@ -403,7 +403,7 @@ Here's a quick explanation for each of the columns in this table:
 
 `temporal_frequency`: Temporal frequency of gabor in Hz.
 
-#### Full field flashes (block 4)
+<b>Full field flashes (block 4)</b>
 
 `color`: Color of the full-field flash stimuli. "1" is white and "-1" is black.
 
