@@ -15,7 +15,7 @@ chapters:
   - file: visual-coding-2p/vc2p-stimuli
 - file: visual-behavior/vb-background
   sections:
-  - file: visual-behavior/ChangeDetectionTask
+  - file: visual-behavior/VB-BehaviorData
     sections:
       - file: visual-behavior/TaskStructure
       - file: visual-behavior/BehaviorTraining
@@ -23,8 +23,7 @@ chapters:
   - file: visual-behavior/VB-Ophys
     sections:
     - file: visual-behavior/VBO-Dataset
-    - file: visual-behavior/VBO-SessionData
-    - file: visual-behavior/VBO-AcrossSessionData
+    - file: visual-behavior/VBO-ExperimentData
   - file: visual-behavior/VB-Neuropixels
     sections:
     - file: visual-behavior/VBN-Dataset
