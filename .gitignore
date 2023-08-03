@@ -4,3 +4,5 @@
 **.npz
 **.npy
 **.nwb
+
+.idea/workspace.xml
