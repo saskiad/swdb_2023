@@ -12,19 +12,19 @@ kernelspec:
   name: python3
 ---
 
-# Visual Behavior Neuropixels Dataset
+# Visual Behavior Ophys Dataset
 
-The main entry point to the VBN dataset is the <code>VisualBehaviorNeuropixelsProjectCache</code> class.  This class is responsible for downloading any requested data or metadata as needed and storing it in well known locations.  For detailed info about how to access this data, check out [this tutorial](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_data_access.html)
+The main entry point to the VBO dataset is the <code>VisualBehaviorOphysProjectCache</code> class.  This class is responsible for downloading any requested data or metadata as needed and storing it in well known locations.  For detailed info about how to access this data, check out [this tutorial](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_ophys_dataset_manifest.html)
 
-We begin by importing the <code>VisualBehaviorNeuropixelsProjectCache</code>  class.
+We begin by importing the <code>VisualBehaviorOphysProjectCache</code>  class.
 
 ```{code-cell} ipython3
 import pandas as pd
 import os
 
 from allensdk.brain_observatory.behavior.behavior_project_cache.\
-    behavior_neuropixels_project_cache \
-    import VisualBehaviorNeuropixelsProjectCache
+    behavior_ophys_project_cache \
+    import VisualBehaviorOphysProjectCache
 ```
 
 Now we can specify our cache directory and set up the cache.
@@ -33,39 +33,40 @@ Now we can specify our cache directory and set up the cache.
 # this path should point to the location of the dataset on your platform
 cache_dir = '/data/'
 
-cache = VisualBehaviorNeuropixelsProjectCache.from_local_cache(
+cache = VisualBehaviorOphysProjectCache.from_local_cache(
             cache_dir=cache_dir, use_static_cache=True)
 ```
 
-We can use the <code>VisualBehaviorNeuropixelsProjectCache</code> to explore the parameters of this dataset. Let's start by examining the cache metadata tables.
+We can use the <code>VisualBehaviorOphysProjectCache</code> to explore the parameters of this dataset. Let's start by examining the cache metadata tables.
 
-## VBN Metadata
+## VBO Metadata
 The data manifest comprises 5 tables: 
 
-1. `ecephys_sessions_table` (64 kB)
-2. `behavior_sessions_table` (531 kB)
-3. `units_table` (130 MB)
-4. `probes_table` (127 kB)
-5. `channels_table` (28 MB)
+1. `behavior_session_table`
+2. `ophys_session_table`
+3. `ophys_experiment_table`
+4. `ophys_cells_table`
 
-The `ecephys_sessions_table` contains metadata for every <b>Neuropixels recording session</b> in the dataset. We attempted to insert 6 probes for each experiment, but occasionally individual insertions failed. The `probe_count` column tells you how many probes were inserted for a given session. The `structure_acronyms` column indicates which brain areas were targeted. For the majority of mice, there are two recording sessions. These were run on consecutive days with two different image sets, `G` and `H`. The `experience_level` column tells you whether the image set used for a particular recording was the same as the training image set (`Familiar`), or different from the training image set (`Novel`).
 
-The `behavior_sessions_table` contains metadata for each behavior session. Some behavior sessions have Neuropixels data associated with them, while others took place during training in the behavior facility. The different training stages that mice progressed through are described by the `session_type`. 
+The `behavior_session_table` contains metadata for every <b>behavior session</b> in the dataset. Some behavior sessions have 2-photon data associated with them, while others took place during training in the behavior facility. The different training stages that mice are progressed through are described by the `session_type`.
 
-The `units_table` contains metadata for every unit in the release. Each unit can be linked to the corresponding recording session, probe and channel by the `ecephys_session_id`, `ecephys_probe_id` and `ecephys_channel_id` columns. This table also contains a number of helpful quality metrics, which can be used to filter out contaminated units before analysis. For more guidance on how to use these metrics, check out [this tutorial](https://allensdk.readthedocs.io/en/latest/_static/examples/nb/visual_behavior_neuropixels_quality_metrics.html).
+The `ophys_session_table` contains metadata for every 2-photon imaging (aka optical physiology, or ophys) session in the dataset, associated with a unique `ophys_session_id`. An <b>ophys session</b> is one continuous recording session under the microscope, and can contain different numbers of imaging planes (aka `ophys_experiments`) depending on which microscope was used. For imaging sessions using the Scientifica single-plane 2P microscope, there will only be one experiment (aka imaging plane) per session. For Multiscope sessions using the multi-plane 2-photon microscope, there can be up to eight imaging planes per session. Quality Control (QC) is performed on each individual imaging plane within a session, so each can fail QC independent of the others. This means that a Multiscope session may not have exactly eight experiments (imaging planes).
 
-The `probes_table` contains metadata for each probe insertion.
+The `ophys_experiment_table` contains metadata for every <b>ophys experiment</b> in the dataset, which corresponds to a single imaging plane recorded in a single session at a specific `imaging_depth` and `targeted_structure``, and associated with a unique `ophys_experiment_id`. A key part of our experimental design is targeting a given population of neurons, contained in one imaging plane, across multiple days for several different `session_types` (further described below) to examine the impact of varying sensory and behavioral conditions on single cell responses.
 
-The `channels_table` contains metadata for each channel recorded during an ephys session. This table provides useful info about where a particular channel is located in the Allen Common Coordinate Framework as well as it's relative position on the probe.
+The collection of all imaging sessions for a given imaging plane is referred to as an <b>ophys container</b>, associated with a unique `ophys_container_id`. Each ophys container may contain different numbers of sessions, depending on which experiments passed QC, and how many retakes occured (when a given `session_type` fails QC on the first try, an attempt is made to re-acquire the session_type on a different recording day - this is called a retake, also described further below).
+
+<p>The <code>ophys_cells_table</code> contains the unique IDs of all cells recorded across all experiments. You can use this table to determine which ophys experiments a given cell was matched in.
 
 Now let's look at each of these tables in more detail to get a better sense of the dataset.
 
-## Ecephys sessions table
-First, let's load the ecephys_sessions_table and print the columns:
+
+## Ophys sessions table
+First, let's load the ophys_sessions_table and print the columns:
 
 ```{code-cell} ipython3
-ecephys_sessions_table = cache.get_ecephys_session_table()
-ecephys_sessions_table.columns
+ophys_sessions = cache.get_ophys_session_table()
+ophys_sessions.columns
 ```
 
 This table gives us lots of useful metadata about each recording session, including the genotype, sex and age of the mouse that was run, what brain areas were recorded and some important info about the stimulus. 

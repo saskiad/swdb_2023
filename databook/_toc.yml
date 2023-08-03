@@ -25,6 +25,7 @@ chapters:
     sections:
     - file: visual-behavior/VBO-Dataset
     - file: visual-behavior/VBO-ExperimentData
+    - file: visual-behavior/VBO-SessionData
   - file: visual-behavior/VB-Neuropixels
     sections:
     - file: visual-behavior/VBN-Dataset
