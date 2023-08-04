@@ -32,10 +32,11 @@ chapters:
     - file: visual-behavior/VBN-SessionData
     - file: visual-behavior/VBN-Tutorial-Quality_Metrics
       title: Tutorial Using Unit Quality and Waveform Metrics
-      title: Tutorial Aligning Neural Data to Stimuli
     - file: visual-behavior/VBN-Tutorial-Aligning_Neural_Data_to_Stimuli.ipynb
+      title: Tutorial Aligning Neural Data to Stimuli
     - file: visual-behavior/VBN-Tutorial-Aligning_Behavior_Data_to_Task_Events.ipynb
+      title: Tutorial Aligning Behavioral Data to Task Events
+
 - file: glossary
 - file: bibliography
-      title: Tutorial Aligning Behavioral Data to Task Events
 
