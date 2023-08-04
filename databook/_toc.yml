@@ -10,6 +10,11 @@ chapters:
   - file: background/transgenic-tools
   - file: background/Two-photon-calcium-imaging
   - file: background/Neuropixels-electrophysiology
+    sections:
+      - file: background/NP-Processing_Pipeline
+      - file: background/NP-Optotagging
+      - file: background/NP-Tutorial-Unit_Quality_Metrics.ipynb
+        title: Tutorial Using Unit Quality and Waveform Metrics
   - file: background/Ophys-ephys-comparison
 - file: visual-coding-2p/vc2p-background
   sections:
@@ -30,12 +35,12 @@ chapters:
     sections:
     - file: visual-behavior/VBN-Dataset
     - file: visual-behavior/VBN-SessionData
-    - file: visual-behavior/VBN-Tutorial-Quality_Metrics
-      title: Tutorial Using Unit Quality and Waveform Metrics
     - file: visual-behavior/VBN-Tutorial-Aligning_Neural_Data_to_Stimuli.ipynb
       title: Tutorial Aligning Neural Data to Stimuli
     - file: visual-behavior/VBN-Tutorial-Aligning_Behavior_Data_to_Task_Events.ipynb
       title: Tutorial Aligning Behavioral Data to Task Events
+    - file: visual-behavior/VBN-Tutorial-Analyzing_LFP_Data.ipynb
+      title: Tutorial Analyzing LFP data
 
 - file: glossary
 - file: bibliography
