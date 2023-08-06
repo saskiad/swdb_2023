@@ -1,0 +1,8 @@
+*.DS_Store
+*.ipynb_checkpoints
+**/_build
+**.npz
+**.npy
+**.nwb
+
+.idea/workspace.xml
