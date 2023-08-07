@@ -15,7 +15,6 @@ execute:
     - 'vc2p*'
     - 'vcnp*'
     - 'VBO-Tutorial*'
-    - '.ipynb'
 
 # Define the name of the latex output file for PDF builds
 latex:
