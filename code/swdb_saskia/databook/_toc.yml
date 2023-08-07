@@ -25,7 +25,9 @@ chapters:
 - file: visual-coding-np/vcnp
 - file: visual-behavior/vb-background
   sections:
-  - file: visual-behavior/VB-BehaviorData
+  - file: visual-behavior/VB-Task
+    sections:
+    - file: visual-behavior/VB-BehaviorSessionData
   - file: visual-behavior/VB-Ophys
     sections:
     - file: visual-behavior/VBO-Dataset

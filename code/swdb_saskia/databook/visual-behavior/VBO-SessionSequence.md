@@ -6,7 +6,7 @@
 
 ## Ophys session sequence 
 
-The `ophys_session_table` only includes sessions with 2-photon imaging data that passed our QC criteria. Behavior sessions that took place during 2-photon imaging but did not pass QC can still be found in the `behavior_session_table`, as it includes the full training history for every mouse. In the `behavior_session_table`, only sessions with passing ophys data will have an `ophys_session_id` (otherwise it will be `NaN`). We can use this information to identify ophys sessions that did not pass QC, but still have behavior data. 
+
 
 #### Let's look at all the behavior sessions that took place on a 2-photon rig for one mouse, in order of acquisition date
 
@@ -40,9 +40,9 @@ print('these are the sessions with valid ophys data')
 ophys_sessions[ophys_sessions.mouse_id==mouse_id][['date_of_acquisition', 'session_type']]
 ```
 
-### Due to QC and retakes, session types in the `ophys_session_table` do not always occur in sequential order
+The `ophys_session_table` only includes sessions with 2-photon imaging data that passed our QC criteria. Behavior sessions that took place during 2-photon imaging but did not pass QC can still be found in the `behavior_session_table`, as it includes the full training history for every mouse. In the `behavior_session_table`, only sessions with passing ophys data will have an `ophys_session_id` (otherwise it will be `NaN`). We can use this information to identify ophys sessions that did not pass QC, but still have behavior data. 
 
-The schematic above depicts ophys sessions OPHYS1-6 in a specific order, however this order is rarely perfectly maintained due to QC failures. The example above shows OPHYS_1-4 in the correct order, but then OPHYS_5 comes after OPHYS_6 because the first attempt at OPHYS_5 failed (as we can see from the behavior_sessions for this mouse), and had to be retaken after OPHYS_6. 
+The schematic above depicts ophys sessions OPHYS_1 through OPHYS_6 in a specific order, however this order is rarely perfectly maintained due to quality control procedures and retakes. The example above shows OPHYS_1-4 in the correct order, but then OPHYS_5 comes after OPHYS_6 because the first attempt at OPHYS_5 failed (as we can see from the behavior_sessions for this mouse), and had to be retaken after OPHYS_6. 
 
 #### Let's look at the session order for a different mouse, imaged on the Multiscope
 

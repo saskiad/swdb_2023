@@ -39,7 +39,7 @@ cache = VisualBehaviorOphysProjectCache.from_local_cache(
 
 We can use the <code>VisualBehaviorOphysProjectCache</code> to explore the parameters of this dataset. Let's start by examining the cache metadata tables.
 
-# VBO Metadata
+# VBO Metadata Tables
 
 The data manifest consists of 4 tables: 
 
@@ -49,21 +49,21 @@ The data manifest consists of 4 tables:
 4. `ophys_cells_table`
 
 
-#### behavior sessions
+### Behavior sessions
 
 The `behavior_session_table` contains metadata for every <b>behavior session</b> in the dataset, including the full training history for each mouse. Accordingly, some behavior sessions have 2-photon data associated with them, and will have a corresponding `ophys_session_id`, while others took place during training in the behavior facility. The different training stages that mice are progressed through are described by the `session_type`.
 
-#### ophys sessions
+### Ophys sessions
 
 The `ophys_session_table` contains metadata for every 2-photon imaging (aka optical physiology, or ophys) session in the dataset, associated with a unique `ophys_session_id`. An <b>ophys session</b> is one continuous recording session under the microscope, and can contain different numbers of imaging planes (aka `ophys_experiments`) depending on which microscope was used. For imaging sessions using the Scientifica single-plane 2P microscope, there will only be one experiment (aka imaging plane) per session. For Multiscope sessions using the multi-plane 2-photon microscope, there can be up to eight imaging planes per session. Quality Control (QC) is performed on each individual imaging plane within a session, so each can fail QC independent of the others. This means that a Multiscope session may not have exactly eight experiments (imaging planes).
 
-#### ophys experiments
+### Ophys experiments
 
 The `ophys_experiment_table` contains metadata for every <b>ophys experiment</b> in the dataset, which corresponds to a single imaging plane recorded in a single session at a specific `imaging_depth` and `targeted_structure`, and associated with a unique `ophys_experiment_id`. A key part of the experimental design is targeting a given population of neurons, contained in one imaging plane, across multiple days with several different `session_types` (further described below) to examine the impact of varying sensory and behavioral conditions on single cell responses.
 
 The collection of all imaging sessions for a given imaging plane is referred to as an <b>ophys container</b>, associated with a unique `ophys_container_id`. If the data for a given `session_type` does not meet the QC criteria on the first try, an attempt is made to re-acquire the session_type on a different recording day (this is called a retake). Thus each b>ophys container</b> may contain different numbers of sessions, depending on which sessions and imaging planes passed QC, and how many retakes occured. 
 
-#### ophys cells 
+### Ophys cells 
 
 <p>The `ophys_cells_table` contains the unique IDs of all cells recorded across all experiments. Each cell has two IDs. The `cell_roi_id` is the ID of the cell in a specific session, the `cell_specimen_id` is the ID of the cell after matching across sessions. Thus, the `cell_roi_id` will be unique to a given `ophys_experiment_id` and `ophys_session_id` while the `cell_specimen_id` will be shared across all `phys_session_ids` for a given `ophys_container_id`. As a reminder, the `ophys_container_id` links the same imaging plane recorded across multiple sessions. 
 
@@ -74,7 +74,7 @@ The collection of all imaging sessions for a given imaging plane is referred to 
 Note that this represents a multi-plane imaging dataset. For single-plane imaging, there will only be one plane (one `ophys_experiment`), corresponding to one row of this diagram .
 
 
-### Now let's look at each of these tables in more detail to learn more about what is in the dataset.
+## Let's look at each of these tables in more detail to learn more about what is in the dataset.
 
 # Behavior Sessions Table
 
@@ -82,7 +82,7 @@ In this dataset, mice are trained on a visual change detection task. This task i
 
 The `behavior_session_table` includes every session for every mouse in the dataset, regardless of whether it occured during 2-photon imaging or during behavior training.
 
-### Load the `behavior_session_table` from the cache
+## Load the `behavior_session_table` from the cache
 
 ```python
 behavior_sessions = cache.get_behavior_session_table()
@@ -94,7 +94,7 @@ behavior_sessions.head()
 
 This table gives us lots of useful metadata about each behavior session, including the genotype, sex and age of the mouse, the experimental design that was used (indicated by the `project_code`), the type of session that was run, and whether the session occured under a 2-photon microscope or in the behavior training facility. 
 
-#### What columns does the behavior_session table have?
+### What columns does the behavior_session table have?
 
 ```python
 behavior_sessions.columns
@@ -162,7 +162,7 @@ session_type
 sex
 : string	sex of the mouse
 
-## Mouse specific metadata
+### Mouse specific metadata
 
 The `mouse_id` is a 6-digit unique identifier for each experimental animal in the dataset
 
@@ -226,7 +226,7 @@ Collecting datasets from two groups of mice with swapped stimulus conditions (`V
 
 In addition, some mice were imaged on the Scientifica single plane imaging systems (`VisualBehavior` and `VisualBehaviorTask1B`), and other mice were imaged on Multiscope for multi-plane imaging (`VisualBehaviorMultiscope` and `VisualBehaviorMultiscope4areasx2d`). 
 
-### behavior sessions can take place on different experimental systems
+#### behavior sessions can take place on different experimental systems
 
 ```python
 print('behavior data could be recorded on these experimental systems:\n')
@@ -335,7 +335,7 @@ ophys_sessions[['ophys_experiment_id', 'ophys_container_id', 'equipment_name']][
 ```
 
 
-## Ophys Experiment Table
+# Ophys Experiment Table
 
 The `ophys_experiment_table` contains all ophys data that is available for analysis, organized by the `ophys_experiment_id` which is associated with an single imaging plane in a single session. 
 
