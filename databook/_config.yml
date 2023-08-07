@@ -14,7 +14,7 @@ execute:
     - 'visual-coding-2p'
     - 'vc2p*'
     - 'vcnp*'
-    - 'VB-BehaviorData*'
+    - 'VBO-Tutorial*'
 
 # Define the name of the latex output file for PDF builds
 latex:
