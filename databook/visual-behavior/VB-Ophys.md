@@ -1,6 +1,6 @@
 # Visual Behavior Ophys Dataset Overview
 
-The Visual Behavior Ophys dataset was generted using in vivo 2-photon calcium imaging (also called optical physiology, or “ophys”) to measure the activity of genetically identified neurons in the visual cortex of mice performing a go/no-go visual change detection task. This dataset can be used to evaluate the influence of experience, expectation, and task engagement on neural coding and dynamics in excitatory and inhibitory cell populations. Data for each experiment is packaged in Neurodata Without Borders (NWB) files that can be accessed via AllenSDK.
+The Visual Behavior Ophys dataset was generted using in vivo 2-photon calcium imaging (also called optical physiology, or “ophys”) to measure the activity of genetically identified neurons in the visual cortex of mice performing a go/no-go visual change detection task. The same population of neurons was recorded over multiple days with varying sensory and behavioral contexts, including familiar and novel stimuli, and passive exposure sessions. This dataset can be used to evaluate the influence of experience, expectation, and task engagement on neural coding and dynamics in excitatory and inhibitory cell populations. Data for each experiment is packaged in Neurodata Without Borders (NWB) files that can be accessed via AllenSDK.
 
 ## Change Detection Task
 
@@ -38,7 +38,7 @@ The full dataset includes neural and behavioral measurements from 107 mice durin
 
 The full behavioral training history of all imaged mice is also provided as part of the dataset, allowing investigation into task learning, behavioral strategy, and inter-animal variability. There are a total of 4,787 behavior sessions available for analysis. 
 
-Different imaging configurations and stimulus sets were used in different groups of mice, resulting in four unique data variants (indicated by their `project_code` in SDK metadata tables and the schematic below). Two single-plane 2-photon datasets were acquired in the primary visual cortex (VISp). In the `VisualBehavior` dataset, mice were trained with image set A and tested with image set B which was novel to the mice. In the `VisualBehaviorTask1` dataset, mice were trained with image set B and tested with image set A as the novel image set. One multi-plane dataset (`VisualBehahviorMultiscope`) was acquired at 4 cortical depths in 2 visual areas (VISp & VISl) using image set A for training and image set B for novelty. 
+Different imaging configurations and stimulus sets were used in different groups of mice, resulting in four unique data variants (indicated by their `project_code` in SDK metadata tables and the schematic below). Two single-plane 2-photon datasets were acquired in the primary visual cortex (VISp). In the `VisualBehavior` dataset, mice were trained with image set A and tested with image set B which was novel to the mice. In the `VisualBehaviorTask1B` dataset, mice were trained with image set B and tested with image set A as the novel image set. One multi-plane dataset (`VisualBehahviorMultiscope`) was acquired at 4 cortical depths in 2 visual areas (VISp & VISl) using image set A for training and image set B for novelty. 
 
 ![data_variants](/images/vbo_dataset_variants.png)
 

@@ -7,11 +7,11 @@ The Visual Behavior Ophys and Visual Behavior Neuropixels datasets are built aro
 
 The task consists of a series of sequentially presented visual stimuli and mice learn to report changes in stimulus identity by licking a spout to earn water rewards. In the final stage of the task, when neural activity measurements are made, natural scene images stimuli are presented for 250 milliseconds followed by a 500 millisecond gray screen interval. This requires that mice compare the current stimulus with the one they saw prior to the gray screen interval, which adds a working memory component to the task. During neural recordings, but not during training, 5% of non-change stimulus presentations are randomly omitted, interrupting the expected stimulus cadence. The stimuli and task parameters used during behavioral training are described in the <b>Behavior Training</b> section below. 
 
-![task_flow](/images/task_flow.png)
+![task_flow](../../images/task_flow.png)
 
 On each trial of the task, a change time is selected from a geometric distribution between 4 and 12 flashes after the time of the last change or the last lick. On "go" trials, the image identity will change at the selected change time. If the mouse licks within the 750 millisecond response window, the trial is considered a hit and a reward is delivered. If the mouse fails to lick after the change, the trial is considered a miss. There is a 3 second "grace period" following each change trial during which licks do not influence the task flow, to allow time for animals to consume the reward. 
 
-![change_times](/images/change_time_trial_types.png)
+![change_times](../../images/change_time_trial_types.png)
 
 On "catch" trials, a change is drawn but the image identity does not change. If the mouse licks within the reward window following the sham change, the trial is considered a false alarm and no reward is delivered. Correctly witholding a lick on a catch trial is a correct reject. This definition of a `catch` trial is a conservative one, and only consideres the non-change stimulus presentations that are drawn from the same distribution as the change times. A less restrictive definition could consider every non-change stimulus presentation as a catch trial, and the false alarm rate can be computed this way as well.
 
