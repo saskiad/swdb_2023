@@ -284,7 +284,7 @@ When mice are transferred to the 2-photon rig for the imaging portion of the exp
 
 During the 2-photon imaging portion of the experiment, mice perform the task with the same set of images they saw during training , as well as an additional novel set of images that they did not see during training. This allows evaluation of the impact of different sensory contexts on neural activity - familiarity versus novelty. Sessions with <b>familiar images</b> include those starting with `OPHYS_0`, `OPHYS_1`, `OPHYS_2`, and `OPHYS_3`. Sessions with <b>novel images</b> include those starting with `OPHYS_4`, `OPHYS_5`, and `OPHYS_6`. 
 
-![experimental_design](/images/vbo_experimental_design.png)
+![experimental_design](/images/vbo_experimental_design_sessions.png)
 
 Interleaved between active behavior sessions are <b>passive viewing</b> sessions where mice are given their daily water ahead of the sesssion (and are thus satiated) and view the stimulus with the lick spout retracted so they are unable to earn water rewards. This allows comparison of neural activity in response to stimuli under different behavioral contexts - active task engagement and passive viewing without reward. Passive sessions include `OPHYS_2_images_A_passive` (passive session with familiar images), and `OPHYS_5_images_A_passive` (passive session with novel images).
 

@@ -18,7 +18,7 @@ On each trial of the task, a change time is selected from a geometric distributi
 
 On "catch" trials, a change is drawn but the image identity does not change. If the mouse licks within the reward window following the sham change, the trial is considered a false alarm and no reward is delivered. Correctly witholding a lick on a catch trial is a correct reject. This definition of a `catch` trial is a conservative one, and only consideres the non-change stimulus presentations that are drawn from the same distribution as the change times. A less restrictive definition could consider every non-change stimulus presentation as a catch trial, and the false alarm rate can be computed this way as well.
 
-![trial_types](/images/trial_diagram.png)
+![trial_types](/images/Trial_diagram.png)
 
 If the mouse licks prior to the scheduled change time, the trial is aborted and starts over again, using the same change time for up to 5 trials in a row. This is to discourage false alarm licks and help shape the behavior, by requiring that mice wait until the change time to respond and get a reward.
 
