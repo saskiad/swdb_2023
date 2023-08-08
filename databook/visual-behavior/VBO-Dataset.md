@@ -19,12 +19,7 @@ The main entry point to the VBO dataset is the <code>VisualBehaviorOphysProjectC
 We begin by importing the <code>VisualBehaviorOphysProjectCache</code>  class.
 
 ```{code-cell} ipython3
-import pandas as pd
-import os
-
-from allensdk.brain_observatory.behavior.behavior_project_cache.\
-    behavior_ophys_project_cache \
-    import VisualBehaviorOphysProjectCache
+from allensdk.brain_observatory.behavior.behavior_project_cache import VisualBehaviorOphysProjectCache
 ```
 
 Now we can specify our cache directory and set up the cache.
@@ -61,20 +56,20 @@ The `ophys_session_table` contains metadata for every 2-photon imaging (aka opti
 
 The `ophys_experiment_table` contains metadata for every <b>ophys experiment</b> in the dataset, which corresponds to a single imaging plane recorded in a single session at a specific `imaging_depth` and `targeted_structure`, and associated with a unique `ophys_experiment_id`. A key part of the experimental design is targeting a given population of neurons, contained in one imaging plane, across multiple days with several different `session_types` (further described below) to examine the impact of varying sensory and behavioral conditions on single cell responses.
 
-The collection of all imaging sessions for a given imaging plane is referred to as an <b>ophys container</b>, associated with a unique `ophys_container_id`. If the data for a given `session_type` does not meet the QC criteria on the first try, an attempt is made to re-acquire the session_type on a different recording day (this is called a retake). Thus each b>ophys container</b> may contain different numbers of sessions, depending on which sessions and imaging planes passed QC, and how many retakes occured. 
+The collection of all imaging sessions for a given imaging plane is referred to as an <b>ophys container</b>, associated with a unique `ophys_container_id`. If the data for a given `session_type` does not meet the QC criteria on the first try, an attempt is made to re-acquire the session_type on a different recording day (this is called a retake). Thus each <b>ophys container</b> may contain different numbers of sessions, depending on which sessions and imaging planes passed QC, and how many retakes occured. 
 
 ### Ophys cells 
 
 <p>The `ophys_cells_table` contains the unique IDs of all cells recorded across all experiments. Each cell has two IDs. The `cell_roi_id` is the ID of the cell in a specific session, the `cell_specimen_id` is the ID of the cell after matching across sessions. Thus, the `cell_roi_id` will be unique to a given `ophys_experiment_id` and `ophys_session_id` while the `cell_specimen_id` will be shared across all `phys_session_ids` for a given `ophys_container_id`. As a reminder, the `ophys_container_id` links the same imaging plane recorded across multiple sessions. 
 
-#### To understand the difference between an `ophys_experiment`, an `ophys_session`, and an `ophys_container`, the following schematic can be helpful
+To understand the difference between an <b>ophys experiment</b>, an <b>ophys session</b>, and an <b>ophys container</b>, the following schematic can be helpful
 
 ![data_structure](/images/vbo_data_structure.png)
 
-Note that this represents a multi-plane imaging dataset. For single-plane imaging, there will only be one plane (one `ophys_experiment`), corresponding to one row of this diagram .
+Note that this represents a multi-plane imaging dataset. For single-plane imaging, there will only be one plane (one <b>ophys experiment</b>), corresponding to one row of this diagram.
 
 
-## Let's look at each of these tables in more detail to learn more about what is in the dataset.
+<b>Let's look at each of these tables in more detail to learn more about what is in the dataset.</b>
 
 # Behavior Sessions Table
 
@@ -82,7 +77,7 @@ In this dataset, mice are trained on a visual change detection task. This task i
 
 The `behavior_session_table` includes every session for every mouse in the dataset, regardless of whether it occured during 2-photon imaging or during behavior training.
 
-## Load the `behavior_session_table` from the cache
+Here is how to load the `behavior_session_table` from the cache
 
 ```python
 behavior_sessions = cache.get_behavior_session_table()
@@ -93,8 +88,6 @@ behavior_sessions.head()
 ```
 
 This table gives us lots of useful metadata about each behavior session, including the genotype, sex and age of the mouse, the experimental design that was used (indicated by the `project_code`), the type of session that was run, and whether the session occured under a 2-photon microscope or in the behavior training facility. 
-
-### What columns does the behavior_session table have?
 
 ```python
 behavior_sessions.columns
@@ -170,7 +163,7 @@ The `mouse_id` is a 6-digit unique identifier for each experimental animal in th
 print('there are ', len(behavior_sessions.mouse_id.unique()), 'mice in the dataset')
 ```
 
-#### The transgenic line determines which neurons are labeled in a given mouse, and what they are labeled with
+The transgenic line determines which neurons are labeled in a given mouse, and what they are labeled with
 
 ```python
 print('the different transgenic lines included in this dataset are:\n')
@@ -204,19 +197,19 @@ print(np.sort(behavior_sessions.indicator.unique()))
 * for more information on GCaMP6, see this paper: https://www.nature.com/articles/nature12354
 * For more information on reporter lines, see these papers: https://doi.org/10.1016/j.neuron.2015.02.022, https://www.sciencedirect.com/science/article/pii/S0092867418308031
 
-#### how many mice per transgenic line?
+How many mice per transgenic line?
 
 ```python
 behavior_sessions.groupby(['full_genotype', 'mouse_id']).count().reset_index().groupby('full_genotype').count()[['mouse_id']]
 ```
 
-## Dataset variants - different mice were subject to different experimental conditions
+### Dataset variants 
 
 Different groups of mice were trained on the task using different image sets and were imaged using different microscopes. These distinct groups of mice are referred to as <b>dataset variants</b> and can be identified using the `project_code` column. 
 
 ![data_variants](/images/vbo_dataset_variants.png)
 
-#### What are the `project_codes`?
+What are the `project_codes`?
 
 ```python
 behavior_sessions.project_code.unique()
@@ -228,7 +221,7 @@ Collecting datasets from two groups of mice with swapped stimulus conditions (`V
 
 In addition, some mice were imaged on the Scientifica single plane imaging systems (`VisualBehavior` and `VisualBehaviorTask1B`), and other mice were imaged on Multiscope for multi-plane imaging (`VisualBehaviorMultiscope` and `VisualBehaviorMultiscope4areasx2d`). 
 
-#### behavior sessions can take place on different experimental systems
+<b> behavior sessions can take place on different experimental systems </b>
 
 ```python
 print('behavior data could be recorded on these experimental systems:\n')
@@ -237,7 +230,7 @@ print(np.sort(behavior_sessions.equipment_name.unique()))
 
 `equipment_name` values starting with 'BEH' indicate behavioral training in the behavior facility, while values starting with 'CAM2P' or 'MESO' indicate behavior sessions that took place under a 2-photon microscope - either a Scientifica single plane imaging system ('CAMP2P.4', 'CAM2P.4', or 'CAM2P.5') or a modified Mesoscope system, also called Multiscope, for multi-plane imaging ('MESO.1').
 
-#### Getting the project code for all sessions for each mouse
+<b> Getting the project code for all sessions for each mouse </b>
 
 You may have noticed that one of the values of `project_code` was `NaN`. This is because project_code is only defined for ophys sessions, so let's fill in the gaps so that all mice have a project_code.
 
@@ -254,7 +247,7 @@ behavior_sessions = behavior_sessions.drop(columns='project_code_session')
 behavior_sessions = behavior_sessions.rename(columns={'project_code_mouse': 'project_code'})
 ```
 
-## Session Types
+### Session Types
 
 The `session_type` for each behavior session indicates the behavioral training stage or 2-photon imaging conditions for that particular session. This determines what stimuli were shown and what task parameters were used.  
 
@@ -264,7 +257,7 @@ print(np.sort(behavior_sessions.session_type[
                   ~behavior_sessions.session_type.isna()].unique()))
 ```
 
-### `TRAINING` session types
+<b> `TRAINING` session types </b>
 
 Mice are progressed through a series of training stages to shape their behavior prior to 2-photon imaging. Mice are automatically advanced between stages depending on their behavioral performance. For a detailed description of the change detection task and advancement criteria, please see the [Technical Whitepaper](https://brainmapportal-live-4cc80a57cd6e400d854-f7fdcae.divio-media.net/filer_public/4e/be/4ebe2911-bd38-4230-86c8-01a86cfd758e/visual_behavior_2p_technical_whitepaper.pdf)
 
@@ -285,7 +278,7 @@ print(np.sort(behavior_sessions.session_type[
 
 Some mice only go up to `TRAINING_4`, while others have an additional training stage labeled `TRAINING_5`. This is due to a minor change made partway through data collection, where an `epilogue` stimulus was introduced during the final training stage prior to 2-photon imaging, in order to habituate the mice to this stimulus, which is used during 2-photon imaging to aid in session to session registration. The `epilogue` stimulus is a 30 second movie clip repeated 10 times, for a total of 5 minutes, that occurs at the end of the `OPHYS` sessions. Training sessions with an epilogue movie include `TRAINING_5_images_X_epilogue`, `TRAINING_5_images_X_handoff_ready` , `TRAINING_5_images_X_handoff_lapsed`. 
 
-### `OPHYS` session types
+<b> `OPHYS` session types </b>
 
 When mice are transferred to the 2-photon rig for the imaging portion of the experiment, they first undergo 1-3 habituation sessions to get accustomed to the new experimental environment (`OPHYS_0_images_X_habituation`). During these sessions, mice perform the task under the microscope, but no experimental data is recorded. 
 
@@ -295,7 +288,7 @@ During the 2-photon imaging portion of the experiment, mice perform the task wit
 
 Interleaved between active behavior sessions are <b>passive viewing</b> sessions where mice are given their daily water ahead of the sesssion (and are thus satiated) and view the stimulus with the lick spout retracted so they are unable to earn water rewards. This allows comparison of neural activity in response to stimuli under different behavioral contexts - active task engagement and passive viewing without reward. Passive sessions include `OPHYS_2_images_A_passive` (passive session with familiar images), and `OPHYS_5_images_A_passive` (passive session with novel images).
 
-#### What `session_types` belong to each `project_code`?
+<b> What `session_types` belong to each `project_code`? </b>
 
 As described above, mice belonging to different `project_codes` were trained with different image sets, which are indicated by the `session_type`. Lets check which `session_types` exist for each `project_code`.
 
@@ -327,7 +320,7 @@ What columns does the `ophys_session_table` have?
 ophys_sessions.columns
 ```
 
-#### How many imaging planes, indicated by a unique `ophys_experiment_id` are there for each <b>ophys session</b>? 
+How many imaging planes, indicated by a unique `ophys_experiment_id` are there for each <b>ophys session</b>? 
 
 ```python
 # what do the ophys_experiment_id and ophys_container_id columns look like? 
@@ -343,11 +336,45 @@ The `ophys_experiment_table` contains all ophys data that is available for analy
 
 The `ophys_experiment_table` contains all the columns in `ophys_session_table` and `behavior_session_table`, plus a few additional ones specific to individual imaging planes, including `imaging_depth` and `targeted_structure`.
 
+<b> Here is how to load the `ophys_experiment_table` </b>
+
+```python
+ophys_experiments = cache.get_ophys_experiment_table()
+print(f"Total number of ophys experiments: {len(ophys_experiments)}\n")
+ophys_experiments.head()
+```
+
+Compare the columns of `ophys_sessions_table` with `ophys_experiments_table`
+
+```python
+ophys_sessions.columns
+```
+
+```python
+ophys_experiments.columns
+```
+
+### Imaging plane specific metadata
+
 imaging_depth
 :	int	depth in microns from the cortical surface, where the data for a given imaging plane was collected
 
 targeted_structure
 :	string	 brain area targeted for a given imaging plane 
+
+What `imaging_depths` and `targeted_structures` are available? Are they different depending on `project_code`?
+
+```python
+# loop through project codes and print the available imaging_depths and targeted_structures
+for project_code in ophys_experiments.project_code.unique():
+    
+    project_experiments = ophys_experiments[ophys_experiments.project_code==project_code]
+    print('\nimaging_depths available for', project_code, 'include: ', project_experiments.imaging_depth.unique())
+    print('\ntargeted_structures available for', project_code, 'include: ', project_experiments.targeted_structure.unique())
+    print('\n')
+```
+
+### Properties of session types
 
 The `ophys_experiment_table` also includes a useful parsing of the `session_type` and `prior_exposures_to_image_set` columns that allows you to filter the data by what `image_set` was used, whether a session is active behavior or `passive` viewing, and whether the session was the first exposure to the novel image set or a subsequent exposure (the `experience_level`).
 
@@ -360,37 +387,10 @@ passive
 experience_level
 : string 'Familiar': image set mouse was trained on, 'Novel 1': the first session with the novel image set, 'Novel >1': a subsequent session with the novel image set
 
-### Get the `ophys_experiment_table`
 
-```python
-ophys_experiments = cache.get_ophys_experiment_table()
-print(f"Total number of ophys experiments: {len(ophys_experiments)}\n")
-ophys_experiments.head()
-```
+### Ophys containers
 
-#### Compare the columns of `ophys_sessions_table` with `ophys_experiments_table`
-
-```python
-ophys_sessions.columns
-```
-
-```python
-ophys_experiments.columns
-```
-
-#### What `imaging_depths` and `targeted_structures` are available? Are they different depending on `project_code`?
-
-```python
-# loop through project codes and print the available imaging_depths and targeted_structures
-for project_code in ophys_experiments.project_code.unique():
-    
-    project_experiments = ophys_experiments[ophys_experiments.project_code==project_code]
-    print('\nimaging_depths available for', project_code, 'include: ', project_experiments.imaging_depth.unique())
-    print('\ntargeted_structures available for', project_code, 'include: ', project_experiments.targeted_structure.unique())
-    print('\n')
-```
-
-### `ophys_experiment_table` is useful for identifying <b>ophys containers</b> to analyze
+<b> The `ophys_experiment_table` is useful for identifying <b>ophys containers</b> to analyze </b>
 
 Each `ophys_experiment_id` represents a single imaging plane recorded in a specific session, and is associated with a single `ophys_session_id`. The `ophys_container_id` indicates the collection of ophys sessions for a given imaging plane and can be used to identify all the sessions available for a given population of neurons. 
 
