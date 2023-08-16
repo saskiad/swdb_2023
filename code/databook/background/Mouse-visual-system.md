@@ -8,11 +8,11 @@ Starting in the early 2000s, researchers begans studying visual physiology and b
 
 ![rfs](/images/NiellHubermann_RFs.png)
 
-Using {term}'Two-photon calcium imaging' allowed large populations of neurons to be recorded across the cortex, and another key early result was that mouse (and rodents broadly) lack the orientation columns found in primates and cats. While the latter species have neurons that are tuned with similar orientations organized in columns, the rodent visual cortex has a "salt and pepper" organization, where the orientation selectively of neighboring neurons are randomly organized. {reference Ohki 2005}
+Using {term}`Two-photon calcium imaging` allowed large populations of neurons to be recorded across the cortex, and another key early result was that mouse (and rodents broadly) lack the orientation columns found in primates and cats. While the latter species have neurons that are tuned with similar orientations organized in columns, the rodent visual cortex has a "salt and pepper" organization, where the orientation selectively of neighboring neurons are randomly organized. {reference Ohki 2005}
 
-Beyond {term}'V1' there are additional higher visual areas (or {term}'HVA's). These are cortical areas that exhibit <b>retinotopy</b> {Marina: can you unpack HVAs a bit here?}
+Beyond {term}`V1` there are additional higher visual areas (or {term}`HVA`s). These are cortical areas that exhibit <b>retinotopy</b> {Marina: can you unpack HVAs a bit here?}
 
-An early question was whether neurons in different {term}'HVA's had distinct visual responses to subserve distinct functions. One framing of this question is whether there are streams akin to the dorsal and ventral streams in primate and cat? Early studies using {term}'Two-photon calcium imaging' compared the {term}'Spatial frequency' and {term}'Temporal frequency' tuning across several HVAs, finding evidence of functional differences between some of the areas. These results, alongside connectivity data, are suggestive that such a dorsal/ventral organization might be present - though with much more interconnection than found in primates/cats. {refs}
+An early question was whether neurons in different {term}HVAs had distinct visual responses to subserve distinct functions. One framing of this question is whether there are streams akin to the dorsal and ventral streams in primate and cat? Early studies using {term}`Two-photon calcium imaging` compared the {term}`Spatial frequency` and {term}`Temporal frequency` tuning across several HVAs, finding evidence of functional differences between some of the areas. These results, alongside connectivity data, are suggestive that such a dorsal/ventral organization might be present - though with much more interconnection than found in primates/cats. {refs}
 
 - More non-standard neurons in mouse {Masland martin}
 
